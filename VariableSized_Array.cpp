@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     int i,j,k,q,n;
     
-    cin>>n>>q;                              //Array pointers
+    cin>>n>>q;                              ///Number of array pointers & Queries
     
     int **outer_array=new int*[n];
     
