@@ -1,3 +1,5 @@
+//Single Linked List
+
 #include <iostream>
 using namespace std;
 
@@ -29,6 +31,7 @@ class sllist{
     
     int isempty();
     void addtohead(T);
+    void addtotail(T);
     void display();
 };
 
@@ -66,6 +69,18 @@ void sllist<T>::addtohead(T x){
     }  
 }
 
+template <class T>
+void sllist<T>::addtotail(T x){
+    
+    node<T> *temp=new node<T>(x);
+    
+    if(isempty())
+     head=tail=temp;
+    else{
+     tail->next=temp;
+     tail=temp;
+    }
+}
 
 int main() {
     
@@ -73,13 +88,28 @@ int main() {
     int a,ch;
     char c;
     
+    
+    
+    
     do{
-        cout<<"\nEnter the value:";
-        cin>>a;
-        l1.addtohead(a);
+        cout<<"\nEnter your choice:";
+        cin>>ch;
         
-        cout<<"\nDo you want to add more?";
-        cin>>c;
+        switch(ch){
+        case 1: do{
+                 cout<<"\nEnter the value:";
+                 cin>>a;
+                 l1.addtohead(a);
+                }while(c=='y');
+                break;
+        case 2: do{
+                 cout<<"\nEnter the value:";
+                 cin>>a;
+                 l1.addtotail(a);
+                }while(c=='y');
+                break;
+        }        
+        
     }while(c=='y');
     
     cout<<"\nElements of list is:";
