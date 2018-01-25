@@ -29,6 +29,10 @@ class sllist{
     
     int isempty();
     void addtohead(T);
+    void addtotail(T);
+    T deletefromhead();
+    T deletefromtail();
+    sllist<T> reverse();
     void display();
 };
 
@@ -66,23 +70,149 @@ void sllist<T>::addtohead(T x){
     }  
 }
 
+template <class T>
+void sllist<T>::addtotail(T x){
+    
+    node<T> *temp=new node<T>(x);
+    
+    if(isempty())
+     head=tail=temp;
+    else{
+     tail->next=temp;
+     tail=temp;
+    }
+}
+
+template <class T>
+T sllist<T>::deletefromhead(){
+    
+    node<T> *temp;
+    T x=head->info;
+    
+    if(!isempty()){
+        
+        if(head==temp){
+            delete head;
+            head=tail=0;
+        }
+        else{
+            temp=head;
+            head=head->next;
+            delete temp;
+        }
+        
+        return x;
+    }
+    else
+    cout<<"\nList is already empty";
+}
+ 
+template <class T>
+T sllist<T>::deletefromtail(){
+    
+    node<T> *temp;
+    T x=head->info;
+    
+    if(!isempty()){
+        
+        if(head==temp){
+            delete head;
+            head=tail=0;
+        }
+        else{
+            temp=head;
+            while(temp->next!=tail)
+                temp=temp->next;
+
+            delete tail;
+            tail=temp;
+            tail->next=0;
+        }
+        
+        return x;
+    }
+    else
+    cout<<"\nList is already empty";
+} 
+ 
+template <class T>
+sllist<T> sllist<T>::reverse(){
+    sllist<T> o1;
+    node<T> *temp=head;
+   
+    while(temp!=0){
+      o1.addtohead(temp->info);
+      temp=temp->next;
+    } 
+    
+    return o1;
+}     
 
 int main() {
     
-    sllist<int> l1;
-    int a,ch;
+    sllist<int> l1,l2;
+    int a,ch,e;
     char c;
     
     do{
-        cout<<"\nEnter the value:";
-        cin>>a;
-        l1.addtohead(a);
+        cout<<"\nEnter your choice:";
+        cin>>ch;
         
-        cout<<"\nDo you want to add more?";
-        cin>>c;
+        switch(ch){
+        case 1: do{
+                 cout<<"\nEnter the value:";
+                 cin>>a;
+                 l1.addtohead(a);
+                 
+                 cout<<"\nWant to insert more?";
+                 cin>>c;
+                }while(c=='y');
+                
+                cout<<"\nElements of list is:";
+                l1.display();
+                break;
+                
+        case 2: do{
+                 cout<<"\nEnter the value:";
+                 cin>>a;
+                 l1.addtotail(a);
+                 
+                 cout<<"\nWant to insert more?";
+                 cin>>c;
+                }while(c=='y');
+                cout<<"\nElements of list is:";
+                l1.display();
+                break;
+                
+        case 3: do{
+                 e=l1.deletefromhead();
+                 
+                 cout<<"\nDeleted element:"<<e;
+                 cout<<"\nWant to delete more?";
+                 cin>>c;
+                }while(c=='y');
+                break;
+        
+        case 4: do{
+                 e=l1.deletefromtail();
+                 
+                 cout<<"\nDeleted element:"<<e;
+                 cout<<"\nWant to delete more?";
+                 cin>>c;
+                }while(c=='y');
+                break; 
+                
+        case 5: l2=l1.reverse();
+                cout<<"\nReversed list:";
+                l2.display();
+                break;
+                
+        }        
+       cout<<"\nWant to continue?";
+       cin>>c; 
     }while(c=='y');
     
-    cout<<"\nElements of list is:";
+    cout<<"\nElements of list 1 is:";
     l1.display();
 	
 	return 0;
