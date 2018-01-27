@@ -1,4 +1,4 @@
-//Single Linked List
+//Single Linked lIst
 #include <iostream>
 using namespace std;
 
@@ -38,6 +38,9 @@ class sllist{
     sllist<T> reverse();
     void reverse_one_pass();
     sllist<T> operator+(sllist);
+    int r_length(node<T>*);
+    void search(T);
+    int r_search(node<T>*,T,T);
     void display();
 };
 
@@ -54,12 +57,16 @@ template <class T>
 void sllist<T>::display(){
     
     node<T> *temp=head;
+    int len=0;
     
     while(temp!=0)
     {
         cout<<temp->info<<"\t";
         temp=temp->next;
+        len++;
     }
+    cout<<"\nLength of list is:"<<(r_length(head));   //Finding length recursively
+    cout<<"\nLength of list is:"<<len;
 }
 
 template <class T>
@@ -274,6 +281,39 @@ int sllist<T>:: isinlist(T x)
     return 0;
 }
 
+template <class T>
+int sllist<T>:: r_length(node<T> *head){                  //Finding length recursively
+    
+    if(head==0)
+     return 0;
+    else
+     return 1+r_length(head->next);
+    
+}
+
+template <class T>
+void sllist<T>:: search(T x){
+    int i;
+    i=r_search(head,x,1);
+    
+    if(i==0)
+     cout<<"Element not found";
+    else
+     cout<<"\nElement found at position:"<<i;
+}
+
+template <class T>
+int sllist<T>:: r_search(node<T> *head, T x,T pos){   //Searching element recursively
+    
+    if(head==0)
+     return 0;
+    else if(head->info==x)
+     return pos;
+    else
+     return r_search(head->next,x,pos+1);
+    
+}
+
 int main() {
     
     sllist<int> l1,l2;
@@ -376,7 +416,12 @@ int main() {
                 
         case 11:
                 l1.reverse_one_pass();
-                break;        
+                break;  
+                
+        case 12: cout<<"\nEnter element to be searched:";
+                 cin>>a;
+                 l1.search(a);
+                 break;
         }        
        cout<<"\nWant to continue?";
        cin>>c; 
