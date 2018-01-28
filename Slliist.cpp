@@ -1,9 +1,9 @@
-//Single Linked lIst
+//Single Linked List
 #include <iostream>
 using namespace std;
 
 template <class T>
-class node{
+class node{                                                         //Node class
     
     public:
     int info;
@@ -16,7 +16,7 @@ class node{
 };
 
 template <class T>
-class sllist{
+class sllist{							    //List class
     
     node<T> *head,*tail;
     
@@ -35,6 +35,7 @@ class sllist{
     T deletefromtail();
     void deletenode(T);
     void deleteinode(int);
+    void deletelist();
     sllist<T> reverse();
     void reverse_one_pass();
     sllist<T> operator+(sllist);
@@ -42,10 +43,12 @@ class sllist{
     void search(T);
     int r_search(node<T>*,T,T);
     void display();
+    void nth_node(int);
+    void middle_elt(); 
 };
 
 template <class T>
-int sllist<T>::isempty(){
+int sllist<T>::isempty(){					    //Function to check whether list is empty or not
     
     if(head==0)
      return 1;
@@ -54,7 +57,7 @@ int sllist<T>::isempty(){
 }
 
 template <class T>
-void sllist<T>::display(){
+void sllist<T>::display(){					    //Function to display content and length of list
     
     node<T> *temp=head;
     int len=0;
@@ -65,12 +68,12 @@ void sllist<T>::display(){
         temp=temp->next;
         len++;
     }
-    cout<<"\nLength of list is:"<<(r_length(head));   //Finding length recursively
-    cout<<"\nLength of list is:"<<len;
+    cout<<"\nLength (Recursively) of list is:"<<(r_length(head));   //Finding length recursively
+    cout<<"\nLength (Iterative) of list is:"<<len;
 }
 
 template <class T>
-void sllist<T>::addtohead(T x){
+void sllist<T>::addtohead(T x){                                     //Function to add element at head
     
     node<T> *temp=new node<T>(x);
     
@@ -83,7 +86,7 @@ void sllist<T>::addtohead(T x){
 }
 
 template <class T>
-void sllist<T>::addtotail(T x){
+void sllist<T>::addtotail(T x){                                     //Function to add element at tail
     
     node<T> *temp=new node<T>(x);
     
@@ -96,7 +99,7 @@ void sllist<T>::addtotail(T x){
 }
 
 template <class T>
-T sllist<T>::deletefromhead(){
+T sllist<T>::deletefromhead(){                                     //Function to delete element from head
     
     node<T> *temp;
     T x=head->info;
@@ -120,7 +123,7 @@ T sllist<T>::deletefromhead(){
 }
  
 template <class T>
-T sllist<T>::deletefromtail(){
+T sllist<T>::deletefromtail(){                                     //Function to delete element from tail
     
     node<T> *temp;
     T x=head->info;
@@ -148,7 +151,7 @@ T sllist<T>::deletefromtail(){
 } 
  
 template <class T>
-sllist<T> sllist<T>::reverse(){
+sllist<T> sllist<T>::reverse(){                                     //Function to reverse the list
     sllist<T> o1;
     node<T> *temp=head;
    
@@ -161,7 +164,7 @@ sllist<T> sllist<T>::reverse(){
 }     
 
 template <class T>
-void sllist<T>:: deletenode(T x){
+void sllist<T>:: deletenode(T x){                                     //Function to delete node of list
     
     if(!isempty()){
         if(head==tail && head->info==x){
@@ -268,6 +271,26 @@ void sllist<T>:: reverse_one_pass(){
 }
 
 template <class T>
+void sllist<T>:: middle_elt(){             //Middle element
+    
+    node<T> *temp1[10];
+    node<T> *temp=head;
+    int i,c=-1;
+    
+    while(temp!=0){
+        temp1[++c]=temp;
+        temp=temp->next;
+    }
+    if(c%2!=0){
+     for(i=c;i>c/2;i--);
+      cout<<"\nMiddle element:"<<temp1[i]->info<<"\t"<<temp1[i+1]->info;
+    }
+    else
+     for(i=c;i!=c/2;i--);
+      cout<<"\nMiddle element:"<<temp1[i]->info;
+}
+
+template <class T>
 int sllist<T>:: isinlist(T x)
 {
     node<T> *temp=head;
@@ -297,11 +320,39 @@ void sllist<T>:: search(T x){
     i=r_search(head,x,1);
     
     if(i==0)
-     cout<<"Element not found";
+     cout<<"\nElement not found";
     else
      cout<<"\nElement found at position:"<<i;
 }
 
+template <class T>
+void sllist<T>:: nth_node(int n){    //Displaying nth element from last
+    
+    node<T> *temp=head;
+    
+    int len=r_length(head);
+    
+    for(int i=0;i<len-n;i++)
+      temp=temp->next;
+     
+    cout<<"\nnth node from last is:"<<temp->info;  
+}
+
+template <class T>
+void sllist<T>:: deletelist(){                                  //Deleting whole list
+    
+    node<T> *prev=head;
+    node<T> *cur=head->next;
+    
+    while(cur!=0){
+        head=cur;
+        delete(prev);
+        prev=cur;
+        cur=cur->next;
+    }
+    head=tail=0;
+}
+    
 template <class T>
 int sllist<T>:: r_search(node<T> *head, T x,T pos){   //Searching element recursively
     
@@ -418,10 +469,21 @@ int main() {
                 l1.reverse_one_pass();
                 break;  
                 
-        case 12: cout<<"\nEnter element to be searched:";
+        case 12: cout<<"\nEnter element to be searched:";                       //Searching element
                  cin>>a;
                  l1.search(a);
                  break;
+                 
+        case 13: l1.middle_elt();                                               //Finding middle element
+                 break;
+                 
+        case 14: cout<<"\nEnter the position of element from last:";            //Finding nth element from last
+                 cin>>e;
+                 l1.nth_node(e);
+                 break;
+                 
+        case 15: l1.deletelist();                                               //Deleting List
+                 break;         
         }        
        cout<<"\nWant to continue?";
        cin>>c; 
