@@ -60,7 +60,6 @@ int main()
 	 cout<<"\nElement found at position:"<<n+1;
 	else
 	 cout<<"\nElement not present";
-	
     return 0;
 }
 
