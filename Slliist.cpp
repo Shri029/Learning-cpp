@@ -50,7 +50,7 @@ class sllist{							    //List class
 };
 
 template <class T>
-int sllist<T>::isempty(){					    //Function to check whether list is empty or not
+int sllist<T>::isempty(){					    //Function: to check whether list is empty or not
     
     if(head==0)
      return 1;
@@ -59,7 +59,7 @@ int sllist<T>::isempty(){					    //Function to check whether list is empty or n
 }
 
 template <class T>
-void sllist<T>::display(){					    //Function to display content and length of list
+void sllist<T>::display(){					    //Function: to display content and length of list
     
     node<T> *temp=head;
     int len=0;
@@ -75,7 +75,7 @@ void sllist<T>::display(){					    //Function to display content and length of l
 }
 
 template <class T>
-void sllist<T>::addtohead(T x){                                     //Function to add element at head
+void sllist<T>::addtohead(T x){                                     //Function: to add element at head
     
     node<T> *temp=new node<T>(x);
     
@@ -88,7 +88,7 @@ void sllist<T>::addtohead(T x){                                     //Function t
 }
 
 template <class T>
-void sllist<T>::addtotail(T x){                                     //Function to add element at tail
+void sllist<T>::addtotail(T x){                                     //Function: to add element at tail
     
     node<T> *temp=new node<T>(x);
     
@@ -101,7 +101,7 @@ void sllist<T>::addtotail(T x){                                     //Function t
 }
 
 template <class T>
-T sllist<T>::deletefromhead(){                                     //Function to delete element from head
+T sllist<T>::deletefromhead(){                                     //Function: to delete element from head
     
     node<T> *temp;
     T x=head->info;
@@ -125,7 +125,7 @@ T sllist<T>::deletefromhead(){                                     //Function to
 }
  
 template <class T>
-T sllist<T>::deletefromtail(){                                     //Function to delete element from tail
+T sllist<T>::deletefromtail(){                                     //Function: to delete element from tail
     
     node<T> *temp;
     T x=head->info;
@@ -153,7 +153,7 @@ T sllist<T>::deletefromtail(){                                     //Function to
 } 
  
 template <class T>
-sllist<T> sllist<T>::reverse(){                                     //Function to reverse the list
+sllist<T> sllist<T>::reverse(){                                     //Function: to reverse the list
     sllist<T> o1;
     node<T> *temp=head;
    
@@ -166,7 +166,7 @@ sllist<T> sllist<T>::reverse(){                                     //Function t
 }     
 
 template <class T>
-void sllist<T>:: deletenode(T x){                                     //Function to delete node of list
+void sllist<T>:: deletenode(T x){                                     //Function: to delete node of list
     
     if(!isempty()){
         if(head==tail && head->info==x){
@@ -341,7 +341,7 @@ void sllist<T>:: nth_node(int n){    //Displaying nth element from last
 }
 
 template <class T>
-void sllist<T>:: occurence_count(T x){                //Function to count occurence of an element.
+void sllist<T>:: occurence_count(T x){                //Function: to count occurence of an element.
     node<T> *temp=head;
     int count=0;
     
