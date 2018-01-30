@@ -1,3 +1,4 @@
+
 //Single Linked List
 #include <iostream>
 using namespace std;
@@ -45,6 +46,7 @@ class sllist{							    //List class
     void display();
     void nth_node(int);
     void middle_elt(); 
+    void occurence_count(T);
 };
 
 template <class T>
@@ -339,6 +341,19 @@ void sllist<T>:: nth_node(int n){    //Displaying nth element from last
 }
 
 template <class T>
+void sllist<T>:: occurence_count(T x){                //Function to count occurence of an element.
+    node<T> *temp=head;
+    int count=0;
+    
+    while(temp!=0){
+        if(temp->info==x)
+         count++;
+        temp=temp->next;
+    }
+    cout<<"\nElement occured "<<count<<" times.";
+}
+
+template <class T>
 void sllist<T>:: deletelist(){                                  //Deleting whole list
     
     node<T> *prev=head;
@@ -483,7 +498,11 @@ int main() {
                  break;
                  
         case 15: l1.deletelist();                                               //Deleting List
-                 break;         
+                 break;
+        case 16: cout<<"\nEnter the element whose occurence to be counted:";
+                 cin>>e;
+                 l1.occurence_count(e);
+                 break;
         }        
        cout<<"\nWant to continue?";
        cin>>c; 
