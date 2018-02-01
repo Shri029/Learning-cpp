@@ -46,11 +46,11 @@ class sllist{							    //List class
     void display();
     void nth_node(int);
     void middle_elt(); 
-    void occurence_count(T);
+    void ispalindrome();
 };
 
 template <class T>
-int sllist<T>::isempty(){					    //Function: to check whether list is empty or not
+int sllist<T>::isempty(){					    //Function to check whether list is empty or not
     
     if(head==0)
      return 1;
@@ -59,7 +59,7 @@ int sllist<T>::isempty(){					    //Function: to check whether list is empty or 
 }
 
 template <class T>
-void sllist<T>::display(){					    //Function: to display content and length of list
+void sllist<T>::display(){					    //Function to display content and length of list
     
     node<T> *temp=head;
     int len=0;
@@ -75,7 +75,7 @@ void sllist<T>::display(){					    //Function: to display content and length of 
 }
 
 template <class T>
-void sllist<T>::addtohead(T x){                                     //Function: to add element at head
+void sllist<T>::addtohead(T x){                                     //Function to add element at head
     
     node<T> *temp=new node<T>(x);
     
@@ -88,7 +88,7 @@ void sllist<T>::addtohead(T x){                                     //Function: 
 }
 
 template <class T>
-void sllist<T>::addtotail(T x){                                     //Function: to add element at tail
+void sllist<T>::addtotail(T x){                                     //Function to add element at tail
     
     node<T> *temp=new node<T>(x);
     
@@ -101,7 +101,7 @@ void sllist<T>::addtotail(T x){                                     //Function: 
 }
 
 template <class T>
-T sllist<T>::deletefromhead(){                                     //Function: to delete element from head
+T sllist<T>::deletefromhead(){                                     //Function to delete element from head
     
     node<T> *temp;
     T x=head->info;
@@ -125,7 +125,7 @@ T sllist<T>::deletefromhead(){                                     //Function: t
 }
  
 template <class T>
-T sllist<T>::deletefromtail(){                                     //Function: to delete element from tail
+T sllist<T>::deletefromtail(){                                     //Function to delete element from tail
     
     node<T> *temp;
     T x=head->info;
@@ -153,7 +153,7 @@ T sllist<T>::deletefromtail(){                                     //Function: t
 } 
  
 template <class T>
-sllist<T> sllist<T>::reverse(){                                     //Function: to reverse the list
+sllist<T> sllist<T>::reverse(){                                     //Function to reverse the list
     sllist<T> o1;
     node<T> *temp=head;
    
@@ -166,7 +166,7 @@ sllist<T> sllist<T>::reverse(){                                     //Function: 
 }     
 
 template <class T>
-void sllist<T>:: deletenode(T x){                                     //Function: to delete node of list
+void sllist<T>:: deletenode(T x){                                     //Function to delete node of list
     
     if(!isempty()){
         if(head==tail && head->info==x){
@@ -341,19 +341,6 @@ void sllist<T>:: nth_node(int n){    //Displaying nth element from last
 }
 
 template <class T>
-void sllist<T>:: occurence_count(T x){                //Function: to count occurence of an element.
-    node<T> *temp=head;
-    int count=0;
-    
-    while(temp!=0){
-        if(temp->info==x)
-         count++;
-        temp=temp->next;
-    }
-    cout<<"\nElement occured "<<count<<" times.";
-}
-
-template <class T>
 void sllist<T>:: deletelist(){                                  //Deleting whole list
     
     node<T> *prev=head;
@@ -379,6 +366,30 @@ int sllist<T>:: r_search(node<T> *head, T x,T pos){   //Searching element recurs
      return r_search(head->next,x,pos+1);
     
 }
+
+template <class T>
+void sllist<T>:: ispalindrome(){                       //Function to check Palindrome
+    
+    node<T> *temp1[10];
+    node<T> *temp=head;
+    int i,j,c=-1,flag=0;
+    
+    while(temp!=0){
+        temp1[++c]=temp;
+        temp=temp->next;
+    }
+     for(i=0,j=c;j>c/2;i++,j--){
+      if(temp1[i]->info!=temp1[j]->info){
+          flag=1;
+          break;
+      }
+    }
+    if(flag==1)
+     cout<<"\nNot palindrome";
+    else
+     cout<<"\nPalindrome";
+}
+
 
 int main() {
     
@@ -498,10 +509,8 @@ int main() {
                  break;
                  
         case 15: l1.deletelist();                                               //Deleting List
-                 break;
-        case 16: cout<<"\nEnter the element whose occurence to be counted:";
-                 cin>>e;
-                 l1.occurence_count(e);
+                 break; 
+        case 16: l1.ispalindrome();
                  break;
         }        
        cout<<"\nWant to continue?";
