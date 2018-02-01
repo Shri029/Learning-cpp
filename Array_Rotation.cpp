@@ -48,6 +48,30 @@ void left_rotate2(int a[],int r,int n){   //Method 2- Storing firts r elements i
     display(a,n);
 }
 
+//-------------------------------REVERSAL ALGORTHM O(n)------------------------------------
+
+void reverse(int a[],int s,int l){   
+    
+ int i,temp=0;                          
+ for(i=s;i<l;i++,l--){
+     temp=a[i];
+     a[i]=a[l];
+     a[l]=temp;
+ }
+}
+
+void left_rotate3(int a[],int r,int n){//Method 3- Reversing and merging subarrays before & after the partition
+   
+    reverse(a,0,r-1);                  //Partition created on the basis of no of elements required to rotate
+    reverse(a,r,n-1);
+    
+    
+    reverse(a,0,n-1);                 //Reversing the merged array
+    
+    cout<<"\nArray after circular left rotation usning method 3:";
+    display(a,n);
+}
+
 //------------------------------ RIGHT ROTATINONS----------------------------------
 
 void right_rotate1(int a[],int r,int n){   //Method 1
@@ -90,6 +114,8 @@ void right_rotate2(int a[],int r,int n){   //Method 2- Storing last r elements i
     cout<<"\nArray after circular right rotation usning method 2:";
     display(a,n);
 }
+
+
 void display(int a[],int n){          //display
   int i;
   for(i=0;i<n;i++)
@@ -102,7 +128,7 @@ int main() {
 	
 	cin>>n;                       //Actual size of array
 	
-	for(i=0;i<n;i++)
+	for(i=0;i<n;i++)              //Input Array
 	 cin>>arr[i];
 	
 	cin>>r;                       //Number of rotation bits
@@ -112,6 +138,8 @@ int main() {
 	
 	left_rotate2(arr,r,n);
 	right_rotate2(arr,r,n);
+	
+	left_rotate3(arr,r,n);
 
 	return 0;
 }
