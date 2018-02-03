@@ -1,4 +1,4 @@
-// C++ code to Segregate 0s and 1s in an array
+// C++ code to Segregate 
 
 #include <iostream>
 using namespace std;
@@ -7,7 +7,33 @@ using namespace std;
 
 void display(int [],int);
 
-void Segregate01_1(int a[],int n){                      //Method 1       O(n)
+//--------------------------------------Even & ODD-----------------------------------------
+
+void SegregateEvenOdd(int a[],int n){                     
+    
+    int i=0,j=n-1,temp;
+    
+    while(i<j){
+        
+        while(a[i]%2==0 && i<j)             // Increase left index untill even no's is being encountered
+           i++;
+        while(a[j]%2==1 && i<j)             // Decrease right index untill odd no's is being encountered
+           j--;
+           
+        if(i<j){                            // Case odd and even no's needs to be exchanged
+           temp=a[i];
+           a[j]=a[i];
+           a[j]=temp;
+           i++;j--;
+        } 
+    }
+    cout<<"\nArray after segregateion using method 2:";
+    display(a,n);
+}
+
+//--------------------------------------0's and 1's-----------------------------------------
+                           //--------Method 1       O(n)----------
+void Segregate01_1(int a[],int n){                     
     
     int i,j=0,count=0;
     
@@ -26,7 +52,8 @@ void Segregate01_1(int a[],int n){                      //Method 1       O(n)
     display(a,n);
 }
 
-void Segregate01_2(int a[],int n){                      //Method 2      O(n)
+                        //---------Method 2       O(n)----------
+void Segregate01_2(int a[],int n){                     
     
     int i=0,j=n-1;
     
@@ -64,6 +91,8 @@ int main() {
 	 
 	 Segregate01_1(arr,n);
 	 Segregate01_2(arr,n);
+	 
+	 SegregateEvenOdd(arr,n);
 
 	return 0;
 }
