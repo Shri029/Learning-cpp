@@ -17,7 +17,9 @@ class stack{
     T pop();
     void display();
     void clear();
-    void topel();
+    int topel();
+    void r_reverse();
+    void insert_reversed(T);
 };
 
 template <class T,int size>
@@ -63,9 +65,9 @@ T stack<T,size>::pop(){
 }
 
 template <class T,int size>
-void stack<T,size>::topel(){
+int stack<T,size>::topel(){
     
-    cout<<"\nTop element is:"<<arr[top];
+    return arr[top];
 }
 
 template <class T,int size>
@@ -73,6 +75,35 @@ void stack<T,size>::clear(){
     
     top=-1;
     
+}
+
+template <class T,int size>
+void stack<T,size>::r_reverse(){
+    
+    if(top>-1){
+     int x=topel();
+     
+    pop();
+    r_reverse();
+    
+    insert_reversed(x);
+ }
+}
+
+
+template <class T,int size>
+void stack<T,size>::insert_reversed(T x){
+    
+    if(top==-1)
+     push(x);
+    else{
+     int e=topel();
+     
+     pop();
+     insert_reversed(x);
+    
+     push(e);
+    }
 }
 
 template <class T,int size>
@@ -122,16 +153,8 @@ int main() {
                 }while(c=='y');
                 break;
                 
-/*        case 3: cout<<"\nEnter the element you want to search:";
-                cin>>a;
-                
-                e=l1.isinstack(a);
-                
-                if(e==1)
-                 cout<<"\nElement found";
-                else
-                 cout<<"\nElement not found";
-                break; */
+        case 3: l1.r_reverse();
+                break; 
                 
         case 4: l1.topel();
                 break;        
