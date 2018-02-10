@@ -395,22 +395,25 @@ void sllist<T>:: remove_duplicates(){                       //Function to remove
     
     node<T> *temp;
     node<T> *temp1=head;
-    node<T> *temp2=head;
+    node<T> *temp2;
     
-    while(temp1->next!=0 ){
+    while(temp1!=0 && temp1->next!=0 ){
+        
+            temp2=temp1;
+        while(temp2!=tail){
             
-      
-        while(temp2->next!=0){
-            
-            if(temp1->info==temp2->next->info){
+            if(temp1->info==temp2->next->info ){
                 
                 temp=temp2->next;
-                temp2->next=temp2->next->next;
-                delete(temp);
-                
+                if(temp2->next!=tail){
+                 temp2->next=temp2->next->next;
+                 delete(temp);
+                }
+                else
+                 deletefromtail();
             }
             else
-            temp2=temp2->next;
+             temp2=temp2->next;
         }
         temp1=temp1->next;
     }
