@@ -1,4 +1,3 @@
-
 //Single Linked List
 #include <iostream>
 using namespace std;
@@ -47,6 +46,7 @@ class sllist{							    //List class
     void nth_node(int);
     void middle_elt(); 
     void ispalindrome();
+    void remove_duplicates();
 };
 
 template <class T>
@@ -368,7 +368,7 @@ int sllist<T>:: r_search(node<T> *head, T x,T pos){   //Searching element recurs
 }
 
 template <class T>
-void sllist<T>:: ispalindrome(){                       //Function to check Palindrome
+void sllist<T>:: ispalindrome(){                       //Function to check Palindrome in list
     
     node<T> *temp1[10];
     node<T> *temp=head;
@@ -390,6 +390,31 @@ void sllist<T>:: ispalindrome(){                       //Function to check Palin
      cout<<"\nPalindrome";
 }
 
+template <class T>
+void sllist<T>:: remove_duplicates(){                       //Function to remove duplicates
+    
+    node<T> *temp;
+    node<T> *temp1=head;
+    node<T> *temp2=head;
+    
+    while(temp1->next!=0 ){
+            
+      
+        while(temp2->next!=0){
+            
+            if(temp1->info==temp2->next->info){
+                
+                temp=temp2->next;
+                temp2->next=temp2->next->next;
+                delete(temp);
+                
+            }
+            else
+            temp2=temp2->next;
+        }
+        temp1=temp1->next;
+    }
+}
 
 int main() {
     
@@ -510,8 +535,13 @@ int main() {
                  
         case 15: l1.deletelist();                                               //Deleting List
                  break; 
+                 
         case 16: l1.ispalindrome();
                  break;
+        
+        case 17: l1.remove_duplicates();
+                 cout<<"\n----Removing Dupliactes----";
+                 break;         
         }        
        cout<<"\nWant to continue?";
        cin>>c; 
