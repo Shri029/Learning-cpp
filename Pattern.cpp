@@ -50,12 +50,30 @@ int main() {
 	
 	for(i=1;i<=5;i++){                                 //Pyramid
     
-        cout<<setw((n+1)-i);
+        for(int space = 1; space <= 5-i; space++)
+         cout <<"\t";
 	    for(j=1;j<=(2*i-1);j++)
-	    cout<<j;
+	    cout<<j<<"\t";
 	    cout<<endl;
 	}
 	cout<<"\n\n\n";	
+	
+	int rows=10, coff = 1;
+
+
+    for(int i = 0; i < rows; i++){                     //Pascal's triangle
+        for(int space = 1; space <= rows-i; space++)
+            cout <<"  ";
+
+        for(int j = 0; j <= i; j++){
+            if (j == 0 || i == 0)
+                coff = 1;
+            else
+                coff = coff*(i-j+1)/j;
+            cout << coff << "   ";
+        }
+        cout << endl;
+    }
    	
 	return 0;
 }
