@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-	int i,j,n=5;
+	int i,j,n=5,k;
 	char ch='A';
 
 //--------------------------Half Pyramids--------------------------	
@@ -16,6 +16,17 @@ int main() {
 	    cout<<endl;
 	}
 	cout<<"\n\n\n";
+	
+	for(i=0;i<=5;i++){                                 //Stars
+	
+	    for(k=5;k>=i;k--)
+	     cout<<" "; 
+	    for(j=0;j<=i;j++)
+	     cout<<"*";
+	     cout<<endl;
+	}
+	cout<<"\n\n\n";
+	
 	
     for(i=1;i<=5;i++){                                 //Digits
 	    for(j=1;j<=i;j++)
@@ -38,6 +49,16 @@ int main() {
 	    cout<<endl;
 	}
 	cout<<"\n\n\n"; 
+	
+	for(i=0;i<=5;i++){                                 //Stars
+	
+	    for(k=0;k<=i;k++)
+	     cout<<" "; 
+	    for(j=5;j>=i;j--)
+	     cout<<"*";
+	     cout<<endl;
+	}
+	cout<<"\n\n\n";
 
     for(i=1;i<=5;i++){                                 //Pyramid
     
