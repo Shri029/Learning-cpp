@@ -1,3 +1,5 @@
+//Implementation of Circular linked list
+
 #include<iostream>
 using namespace std;
 
@@ -36,7 +38,7 @@ int cllist<T>::isempty(){
 	else
 		return 0 ;
 }
-
+//----------------------------------Insertion-----------------------------------
 template <class T>
 void cllist<T>::addtohead(T x){
 	
@@ -67,7 +69,7 @@ void cllist<T>::addtotail(T x){
     	tail=temp;
 	}
 }
-
+//----------------------------------Display--------------------------------
 template <class T>
 void cllist<T>::display(){
 
@@ -83,7 +85,7 @@ void cllist<T>::display(){
 	else
 	 cout<<"\nList is empty";
 }
-
+//----------------------------------Deletion--------------------------------
 template <class T>
 T cllist<T>::deletefromhead(){
 	
