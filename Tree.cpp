@@ -41,8 +41,14 @@ class BSTree{
 	void insertion(T X);
 	void preorder();
 	void preorder(BSTnode<T>*);
+	void inorder();
+	void inorder(BSTnode<T>*);
+	void postorder();
+	void postorder(BSTnode<T>*);
+	void breadthfirst();
 };
 
+//-----------------------------Insertion-------------------------
 template <class T>
 void BSTree<T>::insertion(T x){
 	
@@ -68,7 +74,7 @@ void BSTree<T>::insertion(T x){
 	 prev->right=temp; 	
 }
 
-
+//-----------------------------Display-------------------------
 template <class T>
 void BSTree<T>::preorder(){
 	preorder(root);
@@ -82,6 +88,55 @@ void BSTree<T>::preorder(BSTnode<T> *p){
 		preorder(p->right);
 	}
 }	
+
+template <class T>
+void BSTree<T>::inorder(){
+	inorder(root);
+}
+
+template <class T>
+void BSTree<T>::inorder(BSTnode<T> *p){
+	if(p!=0){
+		preorder(p->left);
+		cout<<p->info<<" ";
+		preorder(p->right);
+	}
+}	
+
+template <class T>
+void BSTree<T>::postorder(){
+	postorder(root);
+}
+
+template <class T>
+void BSTree<T>::postorder(BSTnode<T> *p){
+	if(p!=0){
+		preorder(p->left);
+		preorder(p->right);
+		cout<<p->info<<" ";
+	}
+}	
+
+template <class T>
+void BSTree<T>::breadthfirst(){
+	
+	queue<BSTnode<T>*> q;
+	BSTnode<T> *v=root;
+	
+	q.enqueue(p);
+	
+	while(!q.isempty()){
+		v=q.dequeue();
+		
+		cout<<v->info<<" ";
+		
+		if(v->left!=0)
+		 q.enqueue(v->left);   
+		if(v->right!=0)
+		 q.enqueue(v->right); 
+   }
+}
+
 int main(){
 	BSTree<int> t1,t2;
 	int x;
@@ -96,7 +151,7 @@ int main(){
 	while(c=='y');
 	cout<<"\ntree is:";
 	
-	t1.preorder();
+	t1.breadthfirst();
 	
 	return 0;
 }
