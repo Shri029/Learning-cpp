@@ -25,27 +25,48 @@ void left_rotate1(int a[],int r,int n){   //Method 1
 
 void left_rotate2(int a[],int r,int n){   //Method 2- Storing firts r elements in a temporary array 
 
-    int temp[max_size],i=0,j,k=0;         //and storing at the end after performing shift on rest elements
+    int temp[max_size],i,j=0;            //and storing at the end after performing shift on rest elements
     
-    while(i<r){                           
-        temp[i]=a[i];
-        i++;
+    for(i=0;i<n;i++){
+	    
+        if(i<r){
+         temp[i]=a[i];
+         a[i]=a[i+r];
+        } 
+        else
+         a[i]=a[i+r];
+         
+        if(i>=n-r){
+         a[i]=temp[j];
+         j++;
+        }
     }
-    
-
-    for(j=0,i=0;j<n;j++,i++){            //shifting
-        
-        if(j<n-r){
-         a[j]=a[r+i];
-        } 
-
-        else{
-         a[j]=temp[k];
-         k++;
-        } 
-    } 
     cout<<"\nArray after circular left rotation usning method 2:";
     display(a,n);
+}
+
+void left_rotate4(int a[],int n,int r){ //Dividing array into blocks [size=(gcd(n,r))] and moving i'th element
+    int temp,j,i,k=0,x;                 //of block 
+    int d=gcd(n,r);
+    
+    for(i=0; i<d; i++){
+        temp=a[i];
+        
+        for(j=0,x=i; j<=n/d; j++){      // move i-th values of blocks 
+            k=x+r;
+            
+            if(k>=n)
+             k=k-n;
+             
+            if(k==i)
+             break;
+             
+            a[x]=a[k];
+            x=k;
+        }
+        a[x]=temp;
+    }
+    display(a,n);    
 }
 
 //-------------------------------REVERSAL ALGORTHM O(n)------------------------------------
@@ -72,6 +93,30 @@ void left_rotate3(int a[],int r,int n){//Method 3- Reversing and merging subarra
     display(a,n);
 }
 
+void left_rotate4(int a[],int n,int r){ //Dividing array into blocks [size=(gcd(n,r))] and moving i'th element
+    int temp,j,i,k=0,x;                 //of block 
+    int d=gcd(n,r);
+    
+    for(i=0; i<d; i++){
+        temp=a[i];
+        
+        for(j=0,x=i; j<=n/d; j++){      // move i-th values of blocks 
+            k=x+r;
+            
+            if(k>=n)
+             k=k-n;
+             
+            if(k==i)
+             break;
+             
+            a[x]=a[k];
+            x=k;
+        }
+        a[x]=temp;
+    }
+     cout<<"\nArray after circular left rotation usning method 4:";
+    display(a,n);    
+}
 //------------------------------ RIGHT ROTATINONS----------------------------------
 
 void right_rotate1(int a[],int r,int n){   //Method 1
