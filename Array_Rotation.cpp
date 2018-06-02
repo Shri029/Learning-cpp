@@ -5,6 +5,13 @@ using namespace std;
 
 void display(int[],int);
 
+int gcd(int a,int b){  //Recursive Method to find gcd
+    
+    if(b==0)
+     return a;
+    else 
+     return gcd(b,a%b);
+}
 //-------------------------------LEFT ROTATIONS ----------------------------------
 
 void left_rotate1(int a[],int r,int n){   //Method 1
@@ -19,7 +26,7 @@ void left_rotate1(int a[],int r,int n){   //Method 1
       a[n-1]=temp;
       
   }
-  cout<<"\nArray after circuar left rotatin usning method 1:";
+  cout<<"\nArray after circular left rotatin usning method 1:";
   display(a,n);
 }
 
@@ -43,30 +50,6 @@ void left_rotate2(int a[],int r,int n){   //Method 2- Storing firts r elements i
     }
     cout<<"\nArray after circular left rotation usning method 2:";
     display(a,n);
-}
-
-void left_rotate4(int a[],int n,int r){ //Dividing array into blocks [size=(gcd(n,r))] and moving i'th element
-    int temp,j,i,k=0,x;                 //of block 
-    int d=gcd(n,r);
-    
-    for(i=0; i<d; i++){
-        temp=a[i];
-        
-        for(j=0,x=i; j<=n/d; j++){      // move i-th values of blocks 
-            k=x+r;
-            
-            if(k>=n)
-             k=k-n;
-             
-            if(k==i)
-             break;
-             
-            a[x]=a[k];
-            x=k;
-        }
-        a[x]=temp;
-    }
-    display(a,n);    
 }
 
 //-------------------------------REVERSAL ALGORTHM O(n)------------------------------------
@@ -93,14 +76,14 @@ void left_rotate3(int a[],int r,int n){//Method 3- Reversing and merging subarra
     display(a,n);
 }
 
-void left_rotate4(int a[],int n,int r){ //Dividing array into blocks [size=(gcd(n,r))] and moving i'th element
+void left_rotate4(int a[],int r,int n){ //Dividing array into blocks [size=(gcd(n,r))] and moving i'th element
     int temp,j,i,k=0,x;                 //of block 
     int d=gcd(n,r);
     
     for(i=0; i<d; i++){
         temp=a[i];
         
-        for(j=0,x=i; j<=n/d; j++){      // move i-th values of blocks 
+        for(j=0,x=i; j<=n/d; j++){      // moving i-th values of blocks 
             k=x+r;
             
             if(k>=n)
@@ -146,7 +129,7 @@ void right_rotate2(int a[],int r,int n){   //Method 2- Storing last r elements i
 
     for(j=n-1,i=n-r;j>=0;j--){
         
-        if(j>=r){                     //shifting
+        if(j>=r){                       //Shifting
          a[j]=a[i-1];
          i--;
         }
@@ -161,7 +144,7 @@ void right_rotate2(int a[],int r,int n){   //Method 2- Storing last r elements i
 }
 
 
-void display(int a[],int n){          //display
+void display(int a[],int n){       //Display function 
   int i;
   for(i=0;i<n;i++)
    cout<<"\t"<<a[i];  
@@ -185,6 +168,7 @@ int main() {
 	right_rotate2(arr,r,n);
 	
 	left_rotate3(arr,r,n);
+	left_rotate4(arr,r,n);
 
 	return 0;
 }
