@@ -8,8 +8,8 @@ using namespace std;
 
 #define MAX 100
 
-priority_queue<int> max_left;
-priority_queue<int , vector<int>, greater<int>> min_right;
+priority_queue<int> max_left;						//MaxHeap{.....3,2,1}
+priority_queue<int , vector<int>, greater<int>> min_right;		//MeanHeap{1,2,3.....}
 
 
 void cal_median(double x,double &median){
