@@ -9,7 +9,7 @@ using namespace std;
 
 void ksmallest(int a[],int n,int k){
     
-    set<int> s;
+    set<int> s;						//Storing elements in decreasing order.
     int i;
     set<int>::iterator it;
     
@@ -28,7 +28,7 @@ void ksmallest(int a[],int n,int k){
 
 void klargest(int a[],int n,int k){
     
-    set<int,greater<int>> s;
+    set<int,greater<int>> s;				//To store elements in increasing order.
     int i;
     set<int>::iterator it;
     
