@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <queue>
+#include <map>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ class BSTnode{
 	T info;
 	BSTnode *left, *right;
 	
-	BSTnode(T x,BSTnode *l=0,BSTnode *r=0){
+	BSTnode(T x,BSTnode *l=NULL,BSTnode *r=NULL){
 		info=x;
 		left=l;
 		right=r;
@@ -29,12 +30,12 @@ class BSTree{
 //	int height;
 	
 	BSTree(){
-		root=0;
+		root=NULL;
 //		height=-1;
 	}
 	
     int isempty(){
-    	if(root==0)
+    	if(root==NULL)
     	 return 1;
     	else
 		 return 0; 
@@ -53,6 +54,12 @@ class BSTree{
 	void iterative_in();
 	void height();
 	int height(BSTnode<T>*);
+	void spiral_traversal();
+	void reverse_traversal();
+	void specific_Order();
+	void specific_OrderUtil(BSTnode<T> *,stack<BSTnode<T>*>);
+	void diagonal_Print();
+	void diagonal_PrintUtil(BSTnode<T> *n,int d,map<int,vector<int>> &dp);
 };
 
 //-----------------------------Insertion-------------------------
@@ -64,7 +71,7 @@ void BSTree<T>::insertion(T x){
 	
 	prev=0;
 	
-	while(p!=0){
+	while(p!=NULL){
 		prev=p;
 		
 		if(p->info>x)
@@ -73,7 +80,7 @@ void BSTree<T>::insertion(T x){
 		 p=p->right; 
 	}
 		
-	if(prev==0)
+	if(prev==NULL)
 	 root=temp;
 	else if(prev->info>x)
 	 prev->left=temp;
@@ -82,6 +89,159 @@ void BSTree<T>::insertion(T x){
 }
 
 //-----------------------------TRAVERSALS-------------------------
+
+template <class T>                                         //BreadthFirst
+void BSTree<T>::breadthfirst(){
+	
+	queue<BSTnode<T>*> q;
+	BSTnode<T> *p=root,*v;
+	
+	q.push(p);
+	
+	if (root == NULL)
+      return;
+      
+	while(!q.empty()){
+		v=q.front();
+		q.pop();
+		
+		cout<<v->info<<" ";
+		
+		if(v->left!=NULL)
+		 q.push(v->left);   
+		if(v->right!=NULL)
+		 q.push(v->right); 
+   }
+}
+
+template <class T>                                         //Reverse Traversal
+void BSTree<T>::reverse_traversal(){
+	
+	queue<BSTnode<T>*> q;
+	stack<BSTnode<T>*> s;
+	BSTnode<T> *p=root,*v;
+	
+	q.push(p);
+	
+	if (root == NULL)
+      return;
+      
+	while(!q.empty()){
+		v=q.front();
+		q.pop();
+		
+		cout<<v->info<<" ";
+		
+		if(v->right!=NULL)
+		 q.push(v->right);
+		if(v->left!=NULL)
+		 q.push(v->left);   
+		 
+   }
+   while(!s.empty()){
+       v=s.top();
+       cout<<v->info<<" ";
+       q.pop();
+   }
+}
+
+template <class T>                                         //Spiral Traversal
+void BSTree<T>:: spiral_traversal(){
+	
+	stack <BSTnode<T>*> s1,s2;
+	BSTnode<T> *p=root;
+	
+	if(root==0)
+	 return;
+	
+	s1.push(p); 
+	
+	while(!s1.empty()|| !s2.empty()){
+		
+		while(!s1.empty()){
+			p=s1.top();
+			s1.pop();
+			
+			cout<<p->info<<" ";
+			
+			if(p->right)
+			 s2.push(p->right);
+			if(p->left)
+			 s2.push(p->left); 
+		}
+		while(!s2.empty()){
+			p=s2.top();
+			s2.pop();
+			
+			cout<<p->info<<" ";
+			
+			if(p->left)
+			 s1.push(p->left); 
+			if(p->right)
+			 s1.push(p->right);		
+		}
+	}
+}
+/*
+template <class T>                                         //Specific Order Utility
+void BSTree<T>::specific_OrderUtil(BSTnode<T>* root,stack<BSTnode<T>*> s){
+    
+    queue<BSTnode<T>*> q;
+	BSTnode<T> *p=root,*v,*first=NULL,*second=NULL;
+	
+	if (root == NULL)
+      return;
+  
+    q.push(v->left);   
+    q.push(v->right);
+		 
+   while(!q.empty()){
+       
+       first=q.front();
+       q.pop();
+       second=q.front();
+       q.pop();
+       
+       s.push(second->left);
+       s.push(first->right);
+       s.push(second->right);
+       s.push(first->left);
+       
+       if(first->left->left!=NULL){
+           q.push(first->right);
+           q.push(second->left);
+           q.push(first->left);
+           q.push(second->right);
+       }
+   }
+   
+}
+
+template <class T>                                         //Specific Order
+void BSTree<T>::specific_Order(){
+
+	stack<BSTnode<T>*> s;
+	BSTnode<T> *p=root,*v;
+	
+	s.push(p);
+	
+	if (root->left!=NULL){
+		 s.push(v->right);
+		 s.push(v->left);   
+	}
+   
+   
+    if (root->left->left!=NULL)
+	    specific_OrderUtil(root,s);
+	    
+    while(!s.empty()){
+       v=s.top();
+       cout<<v->info<<" ";
+       s.pop();
+    }
+}
+*/
+
 template <class T>
 void BSTree<T>::preorder(){                                 //Recursive Preorder 
 	preorder(root);
@@ -89,7 +249,7 @@ void BSTree<T>::preorder(){                                 //Recursive Preorder
 
 template <class T>
 void BSTree<T>::preorder(BSTnode<T> *p){
-	if(p!=0){
+	if(p!=NULL){
 		cout<<p->info<<" ";
 		preorder(p->left);
 		preorder(p->right);
@@ -103,7 +263,7 @@ void BSTree<T>::inorder(){
 
 template <class T>
 void BSTree<T>::inorder(BSTnode<T> *p){
-	if(p!=0){
+	if(p!=NULL){
 		preorder(p->left);
 		cout<<p->info<<" ";
 		preorder(p->right);
@@ -117,36 +277,13 @@ void BSTree<T>::postorder(){
 
 template <class T>
 void BSTree<T>::postorder(BSTnode<T> *p){
-	if(p!=0){
+	if(p!=NULL){
 		postorder(p->left);
 		postorder(p->right);
 		cout<<p->info<<" ";
 	}
 }	
 
-template <class T>                                         //BreadthFirst
-void BSTree<T>::breadthfirst(){
-	
-	queue<BSTnode<T>*> q;
-	BSTnode<T> *p=root,*v;
-	
-	q.push(p);
-	
-	if (root == 0)
-      return;
-      
-	while(!q.empty()){
-		v=q.front();
-		q.pop();
-		
-		cout<<v->info<<" ";
-		
-		if(v->left!=0)
-		 q.push(v->left);   
-		if(v->right!=0)
-		 q.push(v->right); 
-   }
-}
 
 template <class T>                                      //Iterative Preorder
 void BSTree<T>::iterative_pre(){
@@ -156,7 +293,7 @@ void BSTree<T>::iterative_pre(){
 	
 	q.push(p);
 	
-	if (root == 0)
+	if (root == NULL)
       return;
       
 	while(!q.empty()){
@@ -164,9 +301,9 @@ void BSTree<T>::iterative_pre(){
 		q.pop();
 		cout<<v->info<<" ";
 		
-		if(v->right!=0)
+		if(v->right!=NULL)
 		 q.push(v->right); 
-		if(v->left!=0)
+		if(v->left!=NULL)
 		 q.push(v->left);   
    }
 }
@@ -228,6 +365,31 @@ void BSTree<T>:: iterative_in(){
     }
 }
 
+template <class T>                                      //Diagonal Print Utility
+void BSTree<T>::diagonal_PrintUtil(BSTnode<T> *n, int d,map<int,vector<int>> &dp){
+
+    if(n==NULL)
+        return;
+    
+    dp[d].push_back(n->info);
+    diagonal_PrintUtil(n->left,d+1,dp);
+    diagonal_PrintUtil(n->right,d,dp);
+}
+
+template <class T>                                      //Diagonal Print
+void BSTree<T>::diagonal_Print(){
+    
+    map<int,vector<int>> dp;
+    
+    diagonal_PrintUtil(root,0,dp);
+    
+    for(auto it=dp.begin(); it!=dp.end();it++){
+        for(auto itr=it->second.begin(); itr!=it->second.end();it++)
+            cout<<*itr<<" ";
+        cout<<endl;
+    }    
+        
+}
 //--------------------------------------------------------------
 template<class T>
 void BSTree<T>::height(){
@@ -265,12 +427,16 @@ int main(){
 	
 	//----------------------Tree traversals----------------------"
 	cout<<"\nBreadthFirst: ";           t1.breadthfirst(); 
+	cout<<"\nReverseTraversal: ";       t1.reverse_traversal();
+	cout<<"\nSpiral Traversal: ";       t1.spiral_traversal();	
 	cout<<"\n\nRecursive Inorder: ";    t1.inorder();
     cout<<"\nIterative Inorder: ";      t1.inorder();
     cout<<"\n\nRecursive Preorder: ";   t1.preorder();
 	cout<<"\nIterative Preorder: ";     t1.iterative_pre();
 	cout<<"\n\nRecursive Postorder: ";  t1.postorder();
 	cout<<"\nIterative Postorder: ";    t1.iterative_post();
+//	cout<<"\nSpecial Order: ";          t1.specific_Order();
+    cout<<"\nDiagonal Print: ";         t1.diagonal_Print();
 	
 	t1.height();
 	
