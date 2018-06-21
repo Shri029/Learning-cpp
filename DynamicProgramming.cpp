@@ -20,7 +20,7 @@ int min(int a,int b,int c){
     return min(min(a,b),c);
 }
 
-int lcs(char *x, char *y,int m,int n){                      //Recursive
+int lcs(char *x, char *y,int m,int n){                      //Recursive Longest Common Subsequence
     
     if(m==0 || n==0)
         return 0;
@@ -32,7 +32,7 @@ int lcs(char *x, char *y,int m,int n){                      //Recursive
         return max(lcs(x,y,m,n-1), lcs(x,y,m-1,n));
 }
 
-string lcsPrint(char *x, char *y,int m,int n){                      //Recursive
+string lcsPrint(char *x, char *y,int m,int n){              //Recursive Longest Common Subsequence Print
     
     if(m==0 || n==0)
         return " ";
@@ -47,7 +47,7 @@ string lcsPrint(char *x, char *y,int m,int n){                      //Recursive
        return lcsPrint(x,y,m-1,n);
 }
 
-int lcsI(char *x, char *y,int m,int n){                      //Iterative
+int lcsI(char *x, char *y,int m,int n){                      //Iterative Longest Common Subsequence
     
     int Opt[m+1][n+1];
     int i,j;
@@ -98,6 +98,24 @@ int editDistance(char *x, char *y,int m,int n){
     return Opt[m][n];
 }
 
+unsigned long int catalanNum(unsigned int n){           //Catalan Numbers
+    
+    unsigned long int cat[n+1];
+    int i,j;
+    
+    cat[0]=cat[1]=1;
+    
+    for(i=2;i<=n;i++){
+        cat[i]=0;
+        for(j=0;j<i;j++)
+            cat[i]+=cat[j]*cat[i-j-1];
+            
+    //       cout<<cat[i]<<" ";                                 Output: 1,1,3,5,14,42..
+    }
+    
+    return cat[n];
+}
+
 int main() {
 
     char x[]="ACGTGGACTACGT";
@@ -112,6 +130,9 @@ int main() {
     cout<<"\nLongest Common Subsequence Length: "<<lcsI(x,y,m,n);
     
     cout<<"\nMinimum Operations required: "<<editDistance(x,y,m,n);
+    
+    cout<<"\nCatalan Number: "<<catalanNum(5);
+    
     
     
 	return 0;
