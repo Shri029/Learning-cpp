@@ -15,7 +15,32 @@ void printPairs(int a[],int n,int sum){
         s.insert(a[i]);    
     }
 }
+/*
 
+There is only 1 difference between the arrays. 
+First array has one element extra added in between. 
+Find the index of the extra element.
+
+int findExtra(int a[],int b[],int n){
+    
+    int l=0, h=n-1, mid=0, i=n;
+    
+    while(l<=h){
+        
+        mid=(l+h)/2;
+        
+        if(a[mid]==b[mid])
+            l=mid+1;
+            
+        else{
+            i=mid;
+            h=mid-1;
+        }
+    }
+    return i;
+    
+}
+*/
 int main() {
 	int A[] = {1, 4, 45, 6, 10, 8};
     int n = 9;
