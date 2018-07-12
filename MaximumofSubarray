@@ -1,0 +1,33 @@
+//Maximum of all subarrays of size k
+#include<iostream>
+using namespace std;
+int main(){
+    
+    int i,t,n,c,max=0,k;
+    
+    cin>>t;
+    
+    while(t--){
+        
+        cin>>n;
+        cin>>k;
+        int a[n];
+        
+        for(i=0; i<n; i++)
+            cin>>a[i];
+            
+        for(i=0; i<=n-k; i++){
+            c=0;max=0;
+            while(c!=k){
+                
+                if(max < a[i+c])
+                    max=a[i+c];
+                c++;    
+            }
+            
+            cout<<max<<" ";
+        }
+        cout<<endl;
+    }    
+	return 0;
+}
