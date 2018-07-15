@@ -430,13 +430,13 @@ int main(){
 	cout<<"\nReverseTraversal: ";       t1.reverse_traversal();
 	cout<<"\nSpiral Traversal: ";       t1.spiral_traversal();	
 	cout<<"\n\nRecursive Inorder: ";    t1.inorder();
-    cout<<"\nIterative Inorder: ";      t1.inorder();
-    cout<<"\n\nRecursive Preorder: ";   t1.preorder();
+    	cout<<"\nIterative Inorder: ";      t1.inorder();
+    	cout<<"\n\nRecursive Preorder: ";   t1.preorder();
 	cout<<"\nIterative Preorder: ";     t1.iterative_pre();
 	cout<<"\n\nRecursive Postorder: ";  t1.postorder();
 	cout<<"\nIterative Postorder: ";    t1.iterative_post();
 //	cout<<"\nSpecial Order: ";          t1.specific_Order();
-    cout<<"\nDiagonal Print: ";         t1.diagonal_Print();
+   	cout<<"\nDiagonal Print: ";         t1.diagonal_Print();
 	
 	t1.height();
 	
